@@ -1,0 +1,40 @@
+.footer {
+  background-color: var(--color-primary);
+  color: var(--color-support-2);
+  padding: 4rem 2rem 2rem;
+  margin-top: 4rem;
+}
+
+.grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+.brand h3 {
+  color: var(--color-secondary);
+  margin-bottom: 1rem;
+}
+
+.seoText {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-support-3);
+  margin-bottom: 1rem;
+}
+
+.copyright {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.85rem;
+}
