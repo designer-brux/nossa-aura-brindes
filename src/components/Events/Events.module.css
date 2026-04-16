@@ -1,8 +1,8 @@
 .section {
-  padding: 5rem 1.5rem;
-  background-color: var(
-    --color-support-2
-  ); /* Fundo lavanda claro para quebrar a seção anterior */
+  padding: var(--space-section) 1.5rem;
+  background-color: var(--color-support-2); /* Lavanda claro premium */
+  position: relative;
+  z-index: 1;
 }
 
 .container {
@@ -10,92 +10,112 @@
   margin: 0 auto;
 }
 
+/* --- Cabeçalho Livre --- */
 .header {
-  text-align: center;
-  margin-bottom: 4rem;
+  text-align: left;
+  max-width: 800px;
+  margin-bottom: 2.4rem;
 }
 
 .title {
-  font-size: 2.25rem;
-  margin-bottom: 1.25rem;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
   color: var(--color-primary);
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.subtitle {
-  max-width: 800px;
-  margin: 0 auto;
-  color: var(--color-text);
-  line-height: 1.7;
-  font-size: 1.05rem;
-}
-
-/* Grid Mobile: 1 coluna | Tablet: 2 | Desktop: 4 */
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-@media (min-width: 640px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  line-height: 1.1;
 }
 
 @media (min-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
+  .title {
+    font-size: 4rem;
   }
 }
 
-.card {
-  background-color: var(--color-white);
-  padding: 2rem 1.5rem;
-  border-radius: 16px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+.subtitle {
+  color: var(--color-text);
+  line-height: 1.7;
+  font-size: 1.2rem;
+}
+
+/* --- Container e Cards Empilháveis --- */
+.cardsContainer {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* A solução do problema do último card: 
+     Isso cria uma "pista" vazia no fundo da seção, permitindo que você continue 
+     rolando até o último card bater no topo antes do formulário aparecer. */
+  /* padding-bottom: 80vh; */
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 24px rgba(91, 42, 134, 0.08);
-}
-
-.iconWrapper {
-  width: 64px;
-  height: 64px;
-  background-color: var(--color-support-2);
-  border-radius: 50%;
+.card {
+  position: sticky;
+  width: 100%;
+  background-color: var(--color-white);
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.03);
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  color: var(--color-primary);
+  flex-direction: column;
+  transform-origin: top center;
 }
 
-.iconWrapper svg {
-  width: 32px;
-  height: 32px;
+.card:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 1024px) {
+  .card {
+    flex-direction: row;
+    height: 500px;
+  }
+}
+
+/* Lado da Imagem */
+.cardImageWrapper {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  background-color: var(--color-bg);
+}
+
+@media (min-width: 1024px) {
+  .cardImageWrapper {
+    width: 50%;
+    height: 100%;
+  }
+}
+
+.cardImage {
+  object-fit: cover;
+}
+
+.cardContent {
+  width: 100%;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .cardContent {
+    width: 50%;
+    padding: 5rem;
+  }
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 .cardTitle {
-  font-size: 1.25rem;
-  margin-bottom: 0.75rem;
+  font-size: 2rem;
   color: var(--color-primary);
 }
 
 .cardDescription {
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   color: var(--color-text);
-  line-height: 1.5;
+  line-height: 1.6;
 }

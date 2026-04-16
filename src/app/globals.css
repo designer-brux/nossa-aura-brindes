@@ -7,13 +7,17 @@
   --color-support-2: #eee3f2;
   --color-support-3: #cef3db;
   --color-support-4: #fde7c4;
-  --color-bg: #f7f7f7;
+  --color-bg: #fdfdfd;
   --color-text: #1c1c1c;
   --color-white: #ffffff;
 
-  /* Tipografia Global (Mapeando as fontes do Next.js) */
+  /* Tipografia Global */
   --font-heading: var(--font-yeseva), serif;
   --font-body: var(--font-josefin), sans-serif;
+
+  /* Sistema de Espaçamento Premium */
+  --space-section: 12rem; /* Aumentado para dar "ar" ao design */
+  --space-mobile: 6rem;
 }
 
 /* Reset Base */
@@ -23,26 +27,29 @@
   margin: 0;
 }
 
-html,
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
   background-color: var(--color-bg);
   color: var(--color-text);
-  font-family: var(--font-body); /* Aplica Josefin Sans em tudo por padrão */
+  font-family: var(--font-body);
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Os títulos usarão a Yeseva One e a cor primária por padrão */
 h1,
 h2,
-h3,
-h4,
-h5,
-h6 {
+h3 {
   font-family: var(--font-heading);
   font-weight: 400;
   color: var(--color-primary);
+  line-height: 1.2;
+}
+
+section {
+  padding: var(--space-section) 2rem;
 }
 
 a {
@@ -52,4 +59,10 @@ a {
 
 button {
   font-family: inherit;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: var(--space-mobile) 1.5rem;
+  }
 }
