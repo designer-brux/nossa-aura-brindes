@@ -1,23 +1,47 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image"; // Importação necessária para performance
+import Image from "next/image";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import styles from "./Header.module.css";
 
 export function Header() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+  const { scrollY } = useScroll();
+
+  // Monitora a rolagem para esconder/mostrar o Header
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() ?? 0;
+
+    // Passou de 150px e rolou para baixo = esconde
+    if (latest > previous && latest > 150) {
+      setIsHidden(true);
+    } else {
+      // Rolou para cima = mostra
+      setIsHidden(false);
+    }
+  });
 
   return (
-    <header className={styles.header}>
+    <motion.header
+      className={styles.header}
+      variants={{
+        visible: { y: 0 },
+        // -150% garante que ele suba o suficiente para compensar o espaço vazio do topo
+        hidden: { y: "-150%" },
+      }}
+      animate={isHidden ? "hidden" : "visible"}
+      transition={{ duration: 0.35, ease: "easeInOut" }}
+    >
       <div className={styles.container}>
-        {/* Substituindo o texto pelo SVG */}
         <a href="/" className={styles.logoLink}>
           <Image
             src="/images/Logo-Site.svg"
             alt="Logo Nossa Aura Brindes"
-            width={140} // Ajuste proporcional ao seu arquivo
-            height={56} // Ajuste proporcional ao seu arquivo
-            priority // Garante que o logo carregue imediatamente
+            width={120}
+            height={40}
+            priority
             className={styles.logo}
           />
         </a>
@@ -55,6 +79,6 @@ export function Header() {
           </svg>
         </button>
       </div>
-    </header>
+    </motion.header>
   );
 }

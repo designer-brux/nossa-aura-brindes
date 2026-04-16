@@ -1,46 +1,35 @@
-"use client"; // Obrigatório para usar hooks (interatividade no temporizador)
+"use client";
 
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./Hero.module.css";
 import { Reveal } from "../Reveal";
-
-const heroSlides = [
-  {
-    src: "/images/garrafa-azul-sem-fundo.webp",
-    alt: "Copos e taças personalizados Nossa Aura",
-  },
-  {
-    src: "/images/garrafa-laranja-sem-fundo.webp",
-    alt: "Copos e taças personalizados Nossa Aura",
-  },
-  {
-    src: "/images/garrafa-roxo-sem-fundo.webp",
-    alt: "Copos e taças personalizados Nossa Aura",
-  },
-];
-
-const CAROUSEL_INTERVAL_MS = 3000; //
+import ColorBends from "../ColorBends";
 
 export function Hero() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  // Lógica do temporizador automático (Carrossel Infinita)
-  useEffect(() => {
-    // Se não houver imagens, não faz nada
-    if (heroSlides.length <= 1) return;
-
-    const timer = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % heroSlides.length);
-    }, CAROUSEL_INTERVAL_MS);
-
-    return () => clearInterval(timer);
-  }, []);
-
   return (
     <section className={styles.hero} id="inicio">
+      {/* O BackgroundLayer agora é o motor visual de toda a seção */}
+      <div className={styles.backgroundLayer}>
+        <ColorBends
+          rotation={90}
+          speed={0.2}
+          colors={["#a973bf", "#eee3f2", "#f49908"]}
+          transparent
+          autoRotate={0}
+          scale={1}
+          frequency={1}
+          warpStrength={1}
+          mouseInfluence={1}
+          parallax={1.2}
+          noise={0}
+          iterations={1}
+          intensity={1.5}
+          bandWidth={6}
+        />
+      </div>
+
       <div className={styles.container}>
-        {/* Coluna da Esquerda - Texto Principal (Maze-inspired) */}
+        {/* Coluna da Esquerda - Texto (40%) */}
         <div className={styles.textColumn}>
           <Reveal>
             <h1 className={styles.title}>
@@ -59,32 +48,22 @@ export function Hero() {
               <a href="#orcamento" className={styles.primaryButton}>
                 Fazer Orçamento
               </a>
-              <a href="#catalogo" className={styles.secondaryButton}>
-                Solicitar Catálogo
-              </a>
             </div>
           </Reveal>
         </div>
 
-        {/* Coluna da Direita - Carrossel Automático (Substitui a imagem única) */}
+        {/* Coluna da Direita - Imagem Transbordando (60%) */}
         <div className={styles.visualColumn}>
-          <Reveal>
-            <div className={styles.carouselWrapper}>
-              {heroSlides.map((slide, index) => (
-                <div
-                  key={index}
-                  className={`${styles.slide} ${index === currentSlide ? styles.activeSlide : styles.hiddenSlide}`}
-                >
-                  <Image
-                    src={slide.src}
-                    alt={slide.alt}
-                    fill
-                    className={styles.curatedImage}
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    priority={index <= 1}
-                  />
-                </div>
-              ))}
+          <Reveal delay={0.2} width="100%">
+            <div className={styles.imageOverflowContainer}>
+              <Image
+                src="/images/hero-img.png"
+                alt="Copos e taças personalizados Nossa Aura"
+                fill
+                className={styles.heroImage}
+                sizes="(max-width: 1024px) 100vw, 60vw"
+                priority
+              />
             </div>
           </Reveal>
         </div>

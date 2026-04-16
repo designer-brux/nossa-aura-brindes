@@ -1,5 +1,5 @@
 .footer {
-  background-color: var(--color-primary); /* Fundo Roxo Escuro */
+  background-color: var(--color-bg-dark); /* Fundo Roxo Escuro */
   color: var(--color-support-2); /* Texto Lavanda Claro */
   padding: 6rem 1.5rem 2rem;
   overflow: hidden; /* Evita vazamento de scroll horizontal pelo texto gigante */
@@ -39,7 +39,7 @@
 }
 
 .columnTitle {
-  color: var(--color-secondary); /* Títulos em Mint Green */
+  color: var(--color-tertiary);
   font-family: var(--font-heading);
   font-size: 1.25rem;
   margin-bottom: 1.5rem;
