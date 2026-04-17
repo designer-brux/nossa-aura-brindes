@@ -4,19 +4,19 @@ import Image from "next/image";
 import styles from "./Events.module.css";
 
 const eventTypes = [
+  // ... (Mantenha o seu array eventTypes exatamente como está)
   {
     id: "corporativo",
     title: "Corporativo",
     description:
-      "Brindes para final de ano, feiras, onboarding e fidelização de clientes.",
-    image:
-      "https://images.unsplash.com/photo-1556761175-5973dc0f32d7?q=80&w=800&auto=format&fit=crop",
+      "Fortaleça sua marca com brindes personalizados para eventos corporativos. Ideais para feiras, ações promocionais e relacionamento com clientes. Nossos brindes corporativos unem qualidade, utilidade e design, ajudando a aumentar o reconhecimento da marca e criar conexões duradouras.",
+    image: "/images/corporate.jpg", // ou a url do seu projeto
   },
   {
     id: "casamentos",
     title: "Casamentos",
     description:
-      "Taças e lembranças intimistas que eternizam o grande dia para seus convidados.",
+      "Encante seus convidados com brindes personalizados para casamento. Nossas lembrancinhas de casamento combinam elegância, utilidade e significado, criando uma recordação especial desse momento único.",
     image:
       "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop",
   },
@@ -24,17 +24,16 @@ const eventTypes = [
     id: "15anos",
     title: "15 Anos e Formaturas",
     description:
-      "Copos personalizados com a identidade visual exata da sua festa e design sofisticado.",
+      "Celebre momentos especiais com brindes personalizados para 15 anos e formaturas. Ideais para marcar conquistas e criar lembranças duradouras.",
     image:
       "https://images.unsplash.com/photo-1516997121675-4c2d1684aa3e?q=80&w=800&auto=format&fit=crop",
   },
   {
     id: "nascimento",
-    title: "Chá de Bebê",
+    title: "Chá revelação",
     description:
-      "Mimos delicados, seguros e duradouros para celebrar a chegada de novas vidas.",
-    image:
-      "https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=800&auto=format&fit=crop",
+      "Surpreenda seus convidados com brindes personalizados para chá revelação. Nossas lembrancinhas tornam esse momento ainda mais especial, com produtos personalizados que unem carinho, qualidade e originalidade.",
+    image: "/images/revelacao1.jpg", // ou a url do seu projeto
   },
 ];
 
@@ -42,7 +41,6 @@ export function Events() {
   return (
     <section className={styles.section} id="ocasioes">
       <div className={styles.container}>
-        {/* Cabeçalho Livre (Acima dos cards) */}
         <div className={styles.header}>
           <h2 className={styles.title}>
             Brindes Personalizados em Valinhos e Região
@@ -54,14 +52,18 @@ export function Events() {
           </p>
         </div>
 
-        {/* Container dos Cards Empilháveis */}
         <div className={styles.cardsContainer}>
           {eventTypes.map((event, index) => (
             <div
               key={event.id}
               className={styles.card}
-              // Alterado de 100px para 140px para garantir o respiro exato do Header global
-              style={{ top: `calc(140px + ${index * 16}px)` }}
+              // A MÁGICA AQUI: Injetamos uma variável CSS, não um estilo direto.
+              // Assim, o CSS decide se vai usar ou não (no caso, só no Desktop).
+              style={
+                {
+                  "--sticky-top": `calc(140px + ${index * 16}px)`,
+                } as React.CSSProperties
+              }
             >
               <div className={styles.cardImageWrapper}>
                 <Image

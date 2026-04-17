@@ -1,6 +1,6 @@
 .section {
   padding: 6rem 0;
-  background-color: var(--color-white);
+  background-color: var(--color-bg);
   overflow: hidden;
 }
 
@@ -165,9 +165,9 @@
   background: transparent;
   border: 1px solid var(--color-primary);
   color: var(--color-primary);
-  width: 32px; /* Levemente menor */
+  width: 48px; /* Levemente menor */
   height: 32px;
-  border-radius: 25%;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;

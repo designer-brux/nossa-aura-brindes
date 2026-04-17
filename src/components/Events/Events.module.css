@@ -1,6 +1,6 @@
 .section {
-  padding: var(--space-section) 1.5rem;
-  background-color: var(--color-support-2); /* Lavanda claro premium */
+  padding: var(--space-mobile) 1.5rem;
+  background-color: var(--color-bg);
   position: relative;
   z-index: 1;
 }
@@ -23,16 +23,19 @@
   line-height: 1.1;
 }
 
+.subtitle {
+  color: var(--color-text);
+  line-height: 1.7;
+  font-size: 1.1rem; /* Reduzi sutilmente para o mobile */
+}
+
 @media (min-width: 1024px) {
   .title {
     font-size: 4rem;
   }
-}
-
-.subtitle {
-  color: var(--color-text);
-  line-height: 1.7;
-  font-size: 1.2rem;
+  .subtitle {
+    font-size: 1.2rem;
+  }
 }
 
 /* --- Container e Cards Empilháveis --- */
@@ -42,33 +45,41 @@
 }
 
 .card {
-  position: sticky;
+  /* MOBILE PRIME: Fluxo normal, sem Sticky! Evita cortes de conteúdo. */
+  position: relative;
   width: 100%;
   background-color: var(--color-white);
   border-radius: 24px;
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--color-support-2);
   display: flex;
   flex-direction: column;
-  transform-origin: top center;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem; /* Espaçamento menor no mobile */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Sombra suave para destacar o card */
 }
 
 .card:last-child {
   margin-bottom: 0;
 }
 
+/* O Efeito Empilhável Premium apenas no Desktop */
 @media (min-width: 1024px) {
   .card {
+    position: sticky;
+    /* Consome a variável criada no React */
+    top: var(--sticky-top);
     flex-direction: row;
     height: 500px;
+    margin-bottom: 4rem;
+    transform-origin: top center; /* Para dar a ilusão de que estão empilhando do topo */
   }
 }
 
-/* Lado da Imagem */
+/* --- Lado da Imagem --- */
 .cardImageWrapper {
   width: 100%;
-  height: 300px;
+  /* Reduzi de 300px para 220px no mobile para não ocupar a tela inteira */
+  height: 220px;
   position: relative;
   background-color: var(--color-bg);
 }
@@ -84,9 +95,11 @@
   object-fit: cover;
 }
 
+/* --- Lado do Texto --- */
 .cardContent {
   width: 100%;
-  padding: 3rem 2rem;
+  /* Padding reduzido no mobile para focar na leitura */
+  padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -95,23 +108,29 @@
 @media (min-width: 1024px) {
   .cardContent {
     width: 50%;
-    padding: 5rem;
+    padding: 4rem 5rem; /* Respiro farto no desktop */
   }
 }
 
 .textContent {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
 .cardTitle {
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: var(--color-primary);
 }
 
+@media (min-width: 1024px) {
+  .cardTitle {
+    font-size: 2.2rem;
+  }
+}
+
 .cardDescription {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: var(--color-text);
   line-height: 1.6;
 }

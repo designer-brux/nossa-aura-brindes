@@ -118,11 +118,11 @@
 }
 
 .submitButton {
-  background-color: var(--color-secondary);
+  background-color: var(--color-tertiary);
   color: var(--color-primary);
   border: none;
   padding: 1.25rem;
-  border-radius: 8px;
+  border-radius: 100px;
   font-size: 1.1rem;
   font-weight: 700;
   cursor: pointer;
